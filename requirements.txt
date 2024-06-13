@@ -1,0 +1,5 @@
+Flask
+telethon
+gunicorn
+bs4
+requests
