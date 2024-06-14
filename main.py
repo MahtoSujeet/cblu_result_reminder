@@ -27,6 +27,7 @@ async def handler(event):
         if cblu.is_result_out(token):
             print("result is out")
             await mymsg.edit("`Aa gya vumro..`")
+            await mymsg.pin(notify=True)
         else:
             await mymsg.edit("`Nahi aaya vumro.`")
 
@@ -37,22 +38,24 @@ async def _(event):
 
 @client.on(events.NewMessage(pattern="/id"))
 async def _(event):
-    await event.reply(f"Le vumro chat ID: `{event.chat_id}`")
+    msg = await event.reply(f"Le vumro chat ID: `{event.chat_id}`")
 
 
 ########## every 10 min #######
 async def check():
     while True:
         if cblu.is_result_out(cblu.get_token()):
-            await client.send_message(-1002137972764, "**AA GYA VUMRO AA GYA, JALDI DEKH VUMRO**")
+            msg = await client.send_message(-1002137972764, "**AA GYA VUMRO AA GYA, JALDI DEKH VUMRO**")
 
-        await asyncio.sleep(3600*6)
+            await msg.pin(notify=True)
+
+        await asyncio.sleep(600)
 
 
 if __name__=="__main__":
     loop = asyncio.get_event_loop()
 
-    # checks in every 6 hour
+    # checks in every 10 min.
     loop.create_task(check())
 
     client.start()
