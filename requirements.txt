@@ -3,4 +3,4 @@ telethon
 gunicorn
 bs4
 requests
-speedtest
+speedtest-cli

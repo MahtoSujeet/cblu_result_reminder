@@ -34,7 +34,7 @@ info={
 
 """
 @tg_client.on(events.NewMessage(
-    pattern=r"speedtest(?:\s|$)([\s\S]*)",
+    pattern=r"/speedtest(?:\s|$)([\s\S]*)",
 ))
 async def _(event):
     "Botserver's speedtest by ookla."

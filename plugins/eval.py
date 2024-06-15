@@ -15,7 +15,7 @@ from telethon.tl.tlobject import TLObject
 
 
 @tg_client.on(events.NewMessage(
-    pattern=r"exec(?:\s|$)([\s\S]*)",
+    pattern=r"/exec(?:\s|$)([\s\S]*)",
 ))
 async def _(event):
     "To Execute terminal commands in a subprocess."
@@ -42,7 +42,7 @@ async def _(event):
     )
 
 @tg_client.on(events.NewMessage(
-    pattern=r"eval(?:\s|$)([\s\S]*)",
+    pattern=r"/eval(?:\s|$)([\s\S]*)",
 ))
 async def _(event):
     "To Execute python script/statements in a subprocess."
