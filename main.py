@@ -40,6 +40,9 @@ async def _(event):
 async def _(event):
     msg = await event.reply(f"Le vumro chat ID: `{event.chat_id}`")
 
+@client.on(events.NewMessage(pattern="/kyabumro"))
+async def handler(event):
+    mymsg = await event.reply("`Are m kya kru bumro. Vase tu chinta mat kr, pass h tu`")
 
 ########## every 10 min #######
 async def check():
