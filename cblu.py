@@ -16,7 +16,7 @@ RESPONSETEXT = """<select class="form-control" data-val="true" data-val-required
 <option value="9">December 2023</option>
 </select>"""
 
-def add_log(message:str="Checked."):
+def add_log(message:str="Checked.\n"):
 
     target_timezone = 'Asia/Kolkata'
     utc_now = datetime.now(pytz.utc)
