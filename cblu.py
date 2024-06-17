@@ -1,4 +1,5 @@
 from datetime import datetime
+import pytz
 import os
 
 import requests
@@ -14,6 +15,17 @@ RESPONSETEXT = """<select class="form-control" data-val="true" data-val-required
 <option value="7">Jul-Aug 2023</option>
 <option value="9">December 2023</option>
 </select>"""
+
+def add_log(message:str="Checked."):
+
+    target_timezone = 'Asia/Kolkata'
+    utc_now = datetime.now(pytz.utc)
+    target_time = utc_now.astimezone(pytz.timezone(target_timezone)).strftime('%Y-%m-%d %H:%M:%S')
+
+
+    with open("log.txt", "a") as f:
+        f.write(f"{target_time} - {message}")
+
 
 class CBLUAPI:
     def __init__(self):
@@ -53,8 +65,8 @@ class CBLUAPI:
         self.session.headers.update(headers)
         response = self.session.post(self.base_url, data=payload)
 
-        with open("logs.txt", "a") as f:
-            f.write(f"Checked on {datetime.now()}\n")
+        # writing to log.txt
+        add_log()
 
         if response.status_code == 200:
             # Parse the HTML content
