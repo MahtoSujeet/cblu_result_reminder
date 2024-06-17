@@ -1,3 +1,4 @@
+from datetime import datetime
 import os
 
 import requests
@@ -51,6 +52,9 @@ class CBLUAPI:
 
         self.session.headers.update(headers)
         response = self.session.post(self.base_url, data=payload)
+
+        with open("logs.txt", "a") as f:
+            f.write(f"Checked on {datetime.now()}\n")
 
         if response.status_code == 200:
             # Parse the HTML content

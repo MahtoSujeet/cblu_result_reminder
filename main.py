@@ -1,12 +1,14 @@
-import os
+import random
 import asyncio
 
-from telethon import TelegramClient, events
+from telethon import events
 from tg_client import tg_client
-
 
 from cblu import CBLUAPI
 
+
+RAHUL_ID = 7037814844
+SUJEET_ID = 6164352361
 cblu = CBLUAPI()
 
 
@@ -16,7 +18,7 @@ from plugins import speedtest, alive, eval
 
 
 @tg_client.on(events.NewMessage(pattern="/aaya"))
-async def handler(event):
+async def _(event):
     mymsg = await event.reply("`Check kr riya hu...`")
     token = cblu.get_token()
     if "ERROR" in str(token):
@@ -31,6 +33,9 @@ async def handler(event):
             await mymsg.edit("`Aa gya vumro..`")
             await mymsg.pin(notify=True)
         else:
+
+            if random.randint(1, 3)==1:
+                return await mymsg.edit("`kya baar baar /aaya /aaya lga rkha h, check kr riya hu na har 10min me, aayega to bta dunga khud mai. Nahi aaya abhi.`")
             await mymsg.edit("`Nahi aaya vumro.`")
 
 @tg_client.on(events.NewMessage(pattern="/text"))
@@ -40,11 +45,14 @@ async def _(event):
 
 @tg_client.on(events.NewMessage(pattern="/id"))
 async def _(event):
-    msg = await event.reply(f"Le vumro chat ID: `{event.chat_id}`")
+    await event.reply(f"Le vumro chat ID: `{event.chat_id}`")
 
 @tg_client.on(events.NewMessage(pattern="/kyabumro"))
 async def handler(event):
-    mymsg = await event.reply("`Are m kya kru bumro. Vase tu chinta mat kr, pass h tu`")
+    if event.sender_id == RAHUL_ID:
+        return await event.reply("`Kya kyaburmo, 2000 taiyar rakh tu bas`")
+
+    return await event.reply("`Are m kya kru bumro. Vase tu chinta mat kr, pass h tu`")
 
 ########## every 10 min #######
 async def check():
