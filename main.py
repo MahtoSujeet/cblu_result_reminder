@@ -1,4 +1,5 @@
 import random
+import requests
 import asyncio
 
 from telethon import events
@@ -57,6 +58,8 @@ async def handler(event):
 ########## every 10 min #######
 async def check():
     while True:
+        requests.get("https://cblu-result-reminder-1.onrender.com")
+
         if cblu.is_result_out(cblu.get_token()):
             msg = await client.send_message(-1002137972764, "**AA GYA VUMRO AA GYA, JALDI DEKH VUMRO**")
 
